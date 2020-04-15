@@ -1,4 +1,4 @@
-# mdm_take2
+
 ---
 title: "Workflow for Complete Network Analysis of MDM using mdmnets package"
 author: Tatyana Zamkovaya
