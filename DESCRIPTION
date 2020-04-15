@@ -1,0 +1,27 @@
+Package: mdmnets
+Type: Package
+Title: Complete MDM Network Analysis for 16S rRNA Data
+Version: 0.1.0
+Author: Tatyana Zamkovaya
+Maintainer: Tatyana Zamkovaya <tatyanaz@ufl.edu>
+Description: Users can investigate the proportion and ecological relevance of MDM. 	A network approach is used to model the microbial relationships within an environment and network measures degree, betweenness, closeness, and hub score are calculated to quantitatively measure the importance of MDM and its impact once removed from its environment. Results are validated by checking for sample and network tool biases.  
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    phyloseq,
+    igraph,
+    ggplot2,
+    dplyr,
+    data.table,
+    ggpubr,
+    Hmisc,
+    Matrix,
+    magrittr,
+    RColorBrewer,
+    reshape2,
+    stringr,
+    stats,
+    parallel,
+    viridis
+RoxygenNote: 7.0.1
