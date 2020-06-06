@@ -28,8 +28,8 @@ phylo <- merge_phyloseq(otutable, mapping)
 ```
 #### Load/convert ASV data generated from QIIME2 or dada2 to phyloseq
 ##### dada2 formatted data conversion <a name="dada2import"> </a>
-If data was made with dada2 and in ASV format, data can be converted like so, using [dada2 tutorial][dada2guide] as a guide: 
-[dada2guide]:(https://benjjneb.github.io/dada2/tutorial.html) 
+If data was made with dada2 and in ASV format, data can be converted like so, using
+[the dada2 tutorial](https://benjjneb.github.io/dada2/tutorial.html) as a guide:
 
 ```r
 library(dada2)
