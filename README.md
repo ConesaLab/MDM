@@ -5,9 +5,7 @@ author: Tatyana Zamkovaya
 output: github_document 
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+
 ## Introduction and Overview
 Networks of the co-occurrence relationships present within a microbial community can detect otherwise overlooked associations between species. Additionally, network metrics can quantitatively determine the most important species of a given environment. While many advances have been made in microbial ecology thanks to a network-based approach, most analyses to date have neglected the role of uncharacterized, unknown species called Microbial Dark Matter (MDM). The presence and dominance of MDM across all non-human biomes suggests that this exclusion is a mistake and that the ecological role of MDM must be understood to gain complete knowledge of all microbial interactions encompassing an environment. We need to better understand why MDM persist and with whom they interact on a global scale. More importantly, we need to evaluate whether certain MDM taxa confer a value to the environment that cannot be provided by other, well-characterized microbes. 
 
@@ -58,7 +56,7 @@ Now you are ready to begin the MDM Analysis!
 
 ## Installation of mdmnets package 
 
-![logo](https://github.com/tatyanazam/mdmnets/blob/master/mdmnetslogo_v2.jpg)
+![logo](https://github.com/ConesaLab/MDM/blob/master/mdmnetslogo_v2.jpg)
 
 You can install mdmnets with:
  
