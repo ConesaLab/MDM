@@ -190,7 +190,7 @@ grid.arrange(hs_nets$Class, hs_nets_wo_mdm$Class$Class)
 ```
 ![class_plots](https://github.com/ConesaLab/MDM/blob/master/hs_net_class_plots_w_and_wo_mdm.png)
 
-## 5. Compare Network Measure Changes <a name="meas"> </a>
+## 5. Calculate Network Measure Changes <a name="meas"> </a>
 Now that networks with and without MDM have been created, we can now evaluate changes in the degree, betweenness, and closeness scores of each node. To calculate these network centrality scores, we use the _`igraph`_ package functions _`degree`_, _`betweenness`_, and _`closeness`_ within our function `degree_calc_f`. For this function, a graph object is input and as output, we have a dataframe of all three centrality measure values for each node present in the network. To show examples for networks with and without MDM, we will use as input _hs_graph_ and _hs_graph_wo_unk_. 
 ```r
 #Calculate degree, closeness and betweenness for original graph including MDM
