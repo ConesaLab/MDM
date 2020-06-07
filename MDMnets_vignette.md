@@ -116,6 +116,20 @@ asv_table <- data.table::fread("otu_table.tsv")
 phylo <- otu_table(asv_table, taxa_are_rows=TRUE)
 ```
 ## 2. Calculate Known vs Unknown (MDM) Proportions <a name="prop"> </a>
+To calculate prevalence and abundance of taxa present, if you have a biom file, use the function `make_prev_df` and your biom file as input, or if you have dada2/QIIME2 data imported as a phyloseq object already, you may do the following to replicate the results of this function:
+```r
+prevdf = apply(X = otu_table(phylo),MARGIN = ifelse(taxa_are_rows(ps), yes=1, no=2), FUN=function(x){sum(x>0)}) #find prevalence of each taxa per sample
+  #bind together taxonomic information and prevalence and total abundance of each taxa into one dataframe
+  prevdf = data.frame(Prevalence = prevdf, TotalAbundance = taxa_sums(phylo), tax_table(phylo))
+  prevdf <- prevdf[prevdf$Prevalence > 0,] #remove taxa not present in samples
+  return(prevdf)
+```
+Now, using the resulting _prevdf_ dataframe as input, a lineplot of the prevalence of known vs unknown taxa at genus level can be created
+using the function `get_back_counts_for_line_plotf`. 
+```r
+prev_lineplot <- get_back_counts_for_line_plotf(prevdf, "Environment name here")
+```
+The above functions can be very computationally intensive so, if necessary, calculate known vs unknown proportions using an HPC environemnt or R (not RStudio.)  
 
 ## 3. Create Networks with MDM <a name="netswmdm"> </a>
 To create networks, first decide on the best sample prevalence for your data. We recommend using as high a percent sample prevalence as possible (ideally 40-60 %), or a minimum of 30 percent sample prevalence for extremely sparse data. 
