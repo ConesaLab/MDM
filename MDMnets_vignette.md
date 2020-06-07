@@ -129,7 +129,7 @@ using the function `get_back_counts_for_line_plotf`.
 ```r
 prev_lineplot <- get_back_counts_for_line_plotf(prevdf, "Environment name here")
 ```
-The above functions can be very computationally intensive so, if necessary, calculate known vs unknown proportions using an HPC environemnt or R (not RStudio.)  
+The above functions can be very computationally intensive so, if necessary, calculate known vs unknown proportions using an HPC environment or R (not RStudio.)  
 
 ## 3. Create Networks with MDM <a name="netswmdm"> </a>
 To create networks, first decide on the best sample prevalence for your data. We recommend using as high a percent sample prevalence as possible (ideally 40-60 %), or a minimum of 30 percent sample prevalence for extremely sparse data. 
