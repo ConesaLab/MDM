@@ -122,7 +122,6 @@ prevdf = apply(X = otu_table(phylo),MARGIN = ifelse(taxa_are_rows(ps), yes=1, no
   #bind together taxonomic information and prevalence and total abundance of each taxa into one dataframe
   prevdf = data.frame(Prevalence = prevdf, TotalAbundance = taxa_sums(phylo), tax_table(phylo))
   prevdf <- prevdf[prevdf$Prevalence > 0,] #remove taxa not present in samples
-  return(prevdf)
 ```
 Now, using the resulting _prevdf_ dataframe as input, a lineplot of the prevalence of known vs unknown taxa at genus level can be created
 using the function `get_back_counts_for_line_plotf`. 
@@ -259,9 +258,35 @@ plot_grid(plotlist=hs_hub_plots)
 
 ## 9. Compare Node Neighbor Interactions <a name="neigh"> </a>
 To find with which taxa each node most frequently shares edges (which taxa co-occur with each other most), we can use the function `get_bar_and_dens_class_interactions`. 
-With this function, we can produce barplots and pie plots of the most frequent neighbors of each node, for both known and unknown taxa at Class level. We can also plot the density distribution comparing the self-self interactions for known and unknown taxa and self-self interactions of unknown taxa compared to all other interactions present in the network. 
 
+```r 
+hs_bar_and_dens_class_interact <- get_bar_and_dens_class_interactions(orig_graph = hs_graph,orig_phylo = new_hs_phyloseqobj_final, met_type = "HS")
+```
+A list of 4 is produced as output. With this function, we can produce barplots (`hs_bar_and_dens_class_interact[[1]]`) and pie plots (`hs_bar_and_dens_class_interact[[2]]`) of the most frequent neighbors of each node, for both known and unknown taxa at Class level. From this function, a plot of the density distribution comparing the self-self interactions of unknown taxa compared to all other interactions present in the network (`hs_bar_and_dens_class_interact[[3]]`) and a plot of self-self Unknown interactions compared to other self-self class interactions (`hs_bar_and_dens_class_interact[[4]]`) are produced. 
 
 ## 10. Validate Results <a name="val"> </a>
-To make sure that the observations found (resultant networks, changes in network measures, neighbors, etc) are not due to biases like samples chosen, network tool chosen, or percent sample prevalence chosen, users can validate and compare results using different network correlation/regression tools and a range of percent sample prevalences. We provide the function `vis_comp_net_meas_checks` to statistically evaluate and visualize these changes using boxplots and also provide the function `create_abund_heatmap` to create heatmaps of OTU abundance across samples. We hope that these checks help with your data analysis. 
+To make sure that the observations found (resultant networks, changes in network measures, neighbors, etc) are not due to biases like samples chosen, network tool chosen, or percent sample prevalence chosen, users can validate and compare results using different network correlation/regression tools and a range of percent sample prevalences. 
+Users can create networks using SparCC regression, CCLasso regression or Pearson correlation using the functions `get_sparcc_info`, `get_cclasso_info` and `get_pearson_info` respectively to first create igraph objects. 
+
+```r
+hs_sparcc_info <- get_sparcc_info(new_hs_phyloseqobj_final, "HS")
+```
+From these functions, a list of 2 is generated - the first element is an igraph and the second is a list of 2 plots, one where nodes are colored by Class, and a second plot where nodes are colored by genus and sized by hub score.
+To visualize these igraphs as networks in the same style as SpiecEasi (to more accurately compare networks), use the function `plotnet_comp_v2`. As input, use the igraph from Sparcc,CCLasso, or Pearson along with an igraph made in SpiecEasi (or whatever igraph you want to model the network shape over), and a phyloseq object. 
+
+Here, we show how a network for SparCC can be visualized, where nodes are colored by Class rank, using the network shape of SpiecEASI as a model. 
+
+```r
+hs_sparcc_plot <- plotnet_comp_v2(hs_sparcc_info[[1]], hs_graph, new_hs_phyloseqobj_final, type="taxa", color="Class", label=NULL) + theme(legend.position="none")
+```
+
+Use the same functions as previously to create networks without MDM, create bootstrap networks, and calculate network measure changes using the SparCC/CCLasso/Pearson igraphs as input instead. 
+
+To redo the analysis using different percent sample prevalence thresholds, use the `get_back_res_meeting_min_occ` function and change the `filter_val_percent` parameter. Use the same functions as previously to create networks with and without MDM, create bootstrap networks and calculate network measure changes. 
+
+We provide the function `vis_comp_net_meas_checks` to statistically evaluate and visualize the changes in network measures across different network tools and across different sample prevalence thresholds using boxplots.
+
+To check that OTUs were not significantly enriched in any sample or study, use the function `create_abund_heatmap` to create heatmaps of OTU abundance across samples. 
+
+We hope that these checks help with your data analysis. 
 
