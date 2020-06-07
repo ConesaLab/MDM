@@ -162,6 +162,7 @@ All plots can then be visualized at once using the `plot_grid` function from `co
 library(cowplot)
 plot_grid(plotlist = hs_nets)
 ```
+![net_plots](https://github.com/ConesaLab/MDM/blob/master/hs_all_net_plots.png)
 
 ## 4. Create Networks without MDM <a name="netswomdm"> </a>
 To create networks without MDM, first find and remove any MDM at taxonomic rank. To do so, use the functions  `met_wo_unk` and `get_graph_wo_unk`, in that order. 
@@ -182,7 +183,6 @@ Using the hot springs data as an example:
 hs_nets_wo_mdm <- lapply(hs_graph_wo_unk, function(orig_graph){ 
 new_nets <- get_net_plots_all_ranks(orig_graph, new_hs_phyloseqobj_final, "HS")
 })
-![net_plots](https://github.com/ConesaLab/MDM/blob/master/hs_all_net_plots.png)
 
 #now, to visually compare networks at the same level, use grid.arrange 
 library(gridExtra)
