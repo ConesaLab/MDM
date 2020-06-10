@@ -62,4 +62,4 @@ You can install mdmnets with:
  
  * `devtools::install_github("ConesaLab/MDM")`
  
- To see how to use the mdmnets package, please ![go here](https://github.com/ConesaLab/MDM/blob/master/MDMnets_vignette.md)
+ To see how to use the mdmnets package, please [go here](https://github.com/ConesaLab/MDM/blob/master/MDMnets_vignette.md)
