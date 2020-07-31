@@ -118,7 +118,7 @@ phylo <- otu_table(asv_table, taxa_are_rows=TRUE)
 ## 2. Calculate Known vs Unknown (MDM) Proportions <a name="prop"> </a>
 To calculate prevalence and abundance of taxa present, if you have a biom file, use the function `make_prev_df` and your biom file as input, or if you have dada2/QIIME2 data imported as a phyloseq object already, you may do the following to replicate the results of this function:
 ```r
-prevdf = apply(X = otu_table(phylo),MARGIN = ifelse(taxa_are_rows(ps), yes=1, no=2), FUN=function(x){sum(x>0)}) #find prevalence of each taxa per sample
+prevdf = apply(X = otu_table(phylo),MARGIN = ifelse(taxa_are_rows(phylo), yes=1, no=2), FUN=function(x){sum(x>0)}) #find prevalence of each taxa per sample
   #bind together taxonomic information and prevalence and total abundance of each taxa into one dataframe
   prevdf = data.frame(Prevalence = prevdf, TotalAbundance = taxa_sums(phylo), tax_table(phylo))
   prevdf <- prevdf[prevdf$Prevalence > 0,] #remove taxa not present in samples
